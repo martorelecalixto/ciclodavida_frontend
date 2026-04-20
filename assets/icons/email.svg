@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Email icon">
+  <title>Email icon</title>
+  <rect width="64" height="64" fill="none"/>
+  <!-- Envelope body -->
+  <path d="M2 16.0 L62 16.0 L62 48.0 L2 48.0 Z" fill="#000000" opacity="0.06"/>
+  <!-- Envelope outline -->
+  <rect x="2" y="16.0" width="60" height="32.0" rx="5" fill="none" stroke="#000000" stroke-width="5"/>
+  <!-- Flap lines -->
+  <path d="M4 16.0 L32.0 32.0 L60 16.0" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
