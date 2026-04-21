@@ -147,8 +147,9 @@ class _MainScreenState extends State<MainScreen> {
       backgroundColor: const Color(0xFF0F172A),
 
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.blueGrey[900],
-        title: Text(
+        title: Text(          
           "Olá, $nome 👋",
           style: const TextStyle(fontSize: 16),
         ),

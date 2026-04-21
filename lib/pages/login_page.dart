@@ -109,8 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() { _carregando = true; _erro = ''; });
 
     // ⚠️ REMOVER ANTES DE PRODUÇÃO
-   // _emailCtrl.text = 'martorele@gmail.com';
-   // _senhaCtrl.text = '12345678';
+    _emailCtrl.text = 'martorele@gmail.com';
+    _senhaCtrl.text = '12345678';
 
     try {
       final resultado = await AuthService.login(

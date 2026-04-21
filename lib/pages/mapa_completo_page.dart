@@ -175,11 +175,6 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
     if (windowSize < 5) windowSize = 5;
     if (windowSize > 20) windowSize = 20;
 
-    //final windowEnd = (windowStart + windowSize).clamp(0, anos.length);
-    //final anosVisiveis = anos.sublist(windowStart, windowEnd);
-
-  
-
     return Scaffold(
         appBar: 
           AppBar(
@@ -189,20 +184,25 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
             centerTitle: isMobile,
             title: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children:  [
                 Icon(Icons.map_outlined, color: _accent, size: 18),
                 SizedBox(width: 8),
                 Text('Mapa Astrológico',
                     style: TextStyle(color: _textPrimary, fontSize: 17)),
+                SizedBox(width: 8),
+                IconButton(
+                  icon: const Icon(Icons.picture_as_pdf),
+                  onPressed:  gerandoPdf ? null : gerarPDF,
+                ),
               ],
             ),
             actions: isMobile
                 ? null
                 : [
-                    IconButton(
+                    /*IconButton(
                       icon: const Icon(Icons.picture_as_pdf),
                       onPressed:  gerandoPdf ? null : gerarPDF,
-                    ),
+                    ),*/
                     const SizedBox(width: 8),
                     _navBtn('Home',   0),
                     _navBtn('Mapa',   1),
@@ -217,15 +217,6 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
             ),
           ),
 
-        /*AppBar(
-          title: const Text('Mapa Astrológico'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.picture_as_pdf),
-              onPressed:  gerandoPdf ? null : gerarPDF,
-            )
-          ],
-        ),*/      
       body: 
       Stack(
         children: [     
@@ -234,73 +225,7 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
                 ? const Center(child: CircularProgressIndicator())
                 : Column(
                     children: [
-                      
-
-                      /*
-                      // ==========================================
-                      // 📊 GRÁFICO
-                      // ==========================================
-                      SizedBox(
-                        height: 250,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child:                                                 
-                            RepaintBoundary(
-                              key: graficoKey,
-                              child: 
-                                LineChart(
-                                  LineChartData(
-                                    minY: -100,
-                                    maxY: 100,
-                                    lineBarsData: [
-                                      LineChartBarData(
-                                        spots: gerarSpots(),
-                                        isCurved: true,
-                                        barWidth: 3,
-                                        dotData: const FlDotData(show: false),
-                                      )
-                                    ],
-
-                                    // 👇 clique no gráfico
-                                    lineTouchData: LineTouchData(
-                                      touchCallback: (event, response) {
-                                        if (response != null &&
-                                            response.lineBarSpots != null &&
-                                            response.lineBarSpots!.isNotEmpty) {
-                                          final spot = response.lineBarSpots!.first;
-                                          setState(() {
-                                            anoSelecionado = spot.x.toInt();
-                                          });
-                                        }
-                                      },
-                                    ),
-
-                                    titlesData: FlTitlesData(
-                                      leftTitles: AxisTitles(
-                                        sideTitles: SideTitles(showTitles: true),
-                                      ),
-                                      bottomTitles: AxisTitles(
-                                        sideTitles: SideTitles(
-                                          showTitles: true,
-                                          interval: 10,
-                                          getTitlesWidget: (value, meta) {
-                                            return Text(
-                                              value.toInt().toString(),
-                                              style: const TextStyle(fontSize: 10),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                              ),
-
-                        ),
-                      ),
-                      */
-
+  
                       SizedBox(
                         height: 260,
                         child: Padding(
@@ -346,16 +271,6 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
                                         }
                                       },                                      
 
-                                      /*touchCallback: (event, response) {
-                                        if (response != null &&
-                                            response.lineBarSpots != null &&
-                                            response.lineBarSpots!.isNotEmpty) {
-                                          final spot = response.lineBarSpots!.first;
-                                          setState(() {
-                                            anoSelecionado = spot.x.toInt();
-                                          });
-                                        }
-                                      },*/
                                     ),
 
                                     // ==========================================
@@ -483,165 +398,6 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
                                 const SizedBox(height: 10),
 
                                 // 📖 TEXTO
-                                /*primeira versao
-                                SizedBox(
-                                  height: 60,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: anos.length,
-                                    itemBuilder: (context, index) {
-                                      final a = anos[index];
-                                      final selecionado = a['ano'] == anoSelecionado;
-
-                                      return GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            anoSelecionado = a['ano'];
-                                          });
-                                        },
-                                        child: Container(
-                                          margin: const EdgeInsets.symmetric(horizontal: 6),
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            color: selecionado ? Colors.blue : Colors.grey.shade200,
-                                            borderRadius: BorderRadius.circular(12),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              a['ano'].toString(),
-                                              style: TextStyle(
-                                                color: selecionado ? Colors.white : Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                */
-
-                                /*segunda versao
-                                SizedBox(
-                                  height: 70,
-                                  child: Scrollbar(
-                                    thumbVisibility: true,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: anos.length,
-                                      itemBuilder: (context, index) {
-                                        final a = anos[index];
-                                        final selecionado = a['ano'] == anoSelecionado;
-
-                                        return GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              anoSelecionado = a['ano'];
-                                            });
-                                          },
-                                          child: AnimatedContainer(
-                                            duration: const Duration(milliseconds: 200),
-                                            margin: const EdgeInsets.symmetric(horizontal: 6),
-                                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                                            decoration: BoxDecoration(
-                                              color: selecionado ? _accent : _surface2,
-                                              borderRadius: BorderRadius.circular(12),
-                                              border: Border.all(
-                                                color: selecionado ? _accent : _border,
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                a['ano'].toString(),
-                                                style: TextStyle(
-                                                  color: selecionado ? Colors.white : _textSecondary,
-                                                  fontWeight:
-                                                      selecionado ? FontWeight.bold : FontWeight.normal,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                */
-
-                                /*terceira versao (MELHOR VERSAO EM RELACAO AO ESTOURO DE TELA)
-                                SizedBox(
-                                  height: 70,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: anosVisiveis.map((a) {
-                                      final selecionado = a['ano'] == anoSelecionado;
-
-                                      return AnimatedContainer(
-                                        duration: const Duration(milliseconds: 250),
-                                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                                        width: 60,
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                          color: selecionado ? _accent : _surface2,
-                                          borderRadius: BorderRadius.circular(10),
-                                          border: Border.all(
-                                            color: selecionado ? _accent : _border,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            a['ano'].toString(),
-                                            style: TextStyle(
-                                              color: selecionado ? Colors.white : _textSecondary,
-                                              fontWeight:
-                                                  selecionado ? FontWeight.bold : FontWeight.normal,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                                */
-
-                                /*quarta versao
-                                SizedBox(
-                                  height: 70,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: anosVisiveis.map((a) {
-                                      final selecionado = a['ano'] == anoSelecionado;
-
-                                      return AnimatedContainer(
-                                        duration: const Duration(milliseconds: 250),
-                                        margin: const EdgeInsets.symmetric(horizontal: 2),
-                                        width: itemWidth.clamp(40, 80), // 🔥 nunca menor que 40 nem maior que 80
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                          color: selecionado ? _accent : _surface2,
-                                          borderRadius: BorderRadius.circular(10),
-                                          border: Border.all(
-                                            color: selecionado ? _accent : _border,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            a['ano'].toString(),
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: itemWidth < 50 ? 10 : 12, // 🔥 adapta fonte
-                                              color: selecionado ? Colors.white : _textSecondary,
-                                              fontWeight:
-                                                  selecionado ? FontWeight.bold : FontWeight.normal,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                                */
-
                                 SizedBox(
                                   height: 70,
                                   child: LayoutBuilder(
@@ -698,8 +454,6 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
                                     },
                                   ),
                                 ),
-
-                                
 
                                 Text(
                                   anoData['texto'] ?? '',
@@ -775,8 +529,6 @@ class _MapaCompletoPageState extends State<MapaCompletoPage> {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       ),      
       child: Text(label, style: const TextStyle(fontSize: 14)),
-      //style: TextButton.styleFrom(foregroundColor: _textSecondary),
-      //child: Text(label, style: const TextStyle(fontSize: 14)),
     );
   }
 

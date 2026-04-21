@@ -86,12 +86,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             alignment: Alignment.center,
             child: _buildLogo(), 
-            /*Text(
-              _nome.isNotEmpty ? _nome[0].toUpperCase() : 'U',
-              style: const TextStyle(
-                color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold,
-              ),
-            ),*/
           ),
           const SizedBox(width: 8),
           Text(
@@ -767,17 +761,8 @@ class _Hero extends StatelessWidget {
           Container(
             width: 2, height: 52,
             decoration: BoxDecoration(
-              //color: _accentDark.withOpacity(0.15),
-              //shape: BoxShape.circle,
-              //border: Border.all(color: _accentDark.withOpacity(0.4), width: 1.5),
             ),
             alignment: Alignment.center,
-            /*child: Text(
-              nome.isNotEmpty ? nome[0].toUpperCase() : 'U',
-              style: const TextStyle(
-                color: _accent, fontSize: 22, fontWeight: FontWeight.bold,
-              ),
-            ),*/
           ),
           const SizedBox(width: 16),
           Expanded(
