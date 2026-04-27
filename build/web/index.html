@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
   <base href="/">
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="description" content="Ciclo da Vida">
+
+  <!-- 🔥 SEO PRINCIPAL -->
+  <title>Ciclo da Vida | Previsão da Vida e Mapa de Ciclo Pessoal</title>
+
+  <meta name="description" content="Descubra sua previsão da vida com base no seu ciclo pessoal. Gere seu mapa de ciclo da vida e entenda seus momentos mais importantes com precisão.">
+
+  <meta name="keywords" content="previsão da vida, ciclo da vida, mapa de ciclo pessoal, astrologia pessoal, ciclos de vida, mapa da vida, numerologia ciclo">
+
+  <meta name="author" content="Ciclo da Vida">
+
+  <!-- 🔥 CANONICAL -->
+  <link rel="canonical" href="https://ciclodavida.net.br/">
+
+  <!-- 🔥 ROBOTS -->
+  <meta name="robots" content="index, follow, max-image-preview:large">
 
   <!-- MOBILE -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -20,7 +34,49 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <title>Ciclo da Vida</title>
+  <!-- 🔥 PERFORMANCE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- 🔥 OPEN GRAPH (WhatsApp / Facebook) -->
+  <meta property="og:title" content="Ciclo da Vida - Mapa de Ciclo Pessoal">
+  <meta property="og:description" content="Descubra sua previsão da vida e entenda seus ciclos pessoais com clareza.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciclodavida.net.br">
+  <meta property="og:image" content="https://ciclodavida.net.br/icons/Icon-512.png">
+
+  <!-- 🔥 TWITTER -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ciclo da Vida">
+  <meta name="twitter:description" content="Previsão da vida e mapa de ciclo pessoal">
+  <meta name="twitter:image" content="https://ciclodavida.net.br/icons/Icon-512.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Ciclo da Vida",
+    "url": "https://ciclodavida.net.br",
+    "description": "Descubra sua previsão da vida e gere seu mapa de ciclo pessoal com base nos seus dados.",
+    "inLanguage": "pt-BR",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://ciclodavida.net.br/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ciclo da Vida",
+    "url": "https://ciclodavida.net.br",
+    "logo": "https://ciclodavida.net.br/icons/Icon-512.png",
+    "sameAs": []
+  }
+  </script> 
 
   <!-- SPLASH STYLE -->
   <style>
@@ -119,81 +175,63 @@
   <!-- FLUTTER -->
   <script src="main.dart.js"></script>
 
-  <!-- PWA SCRIPT COMPLETO -->
- <script>
-  let deferredPrompt = null;
-  let isInstalled = false;
+  <!-- PWA SCRIPT -->
+  <script>
+    let deferredPrompt = null;
+    let isInstalled = false;
 
-  // Detecta instalação
-  window.addEventListener('appinstalled', () => {
-    isInstalled = true;
-    console.log('PWA instalado');
-  });
+    window.addEventListener('appinstalled', () => {
+      isInstalled = true;
+      console.log('PWA instalado');
+    });
 
-  // Detecta standalone
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    isInstalled = true;
-  }
-
-  // Evento Android install
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    // 🔥 avisa Flutter que pode instalar
-    window.dispatchEvent(new Event('pwaInstallAvailable'));
-  });
-
-  function isIos() {
-    return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
-  }
-
-  function isInStandaloneMode() {
-    return ('standalone' in window.navigator) && window.navigator.standalone;
-  }
-
-  // 🔥 Flutter chama isso
-  window.installPWA = async function () {
-
-    if (isInstalled || isInStandaloneMode()) {
-      alert("O app já está instalado 👍");
-      return;
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      isInstalled = true;
     }
 
-    // Android
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      window.dispatchEvent(new Event('pwaInstallAvailable'));
+    });
 
-      const choice = await deferredPrompt.userChoice;
+    function isIos() {
+      return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+    }
 
-      if (choice.outcome === 'accepted') {
-        console.log('Usuário instalou');
+    function isInStandaloneMode() {
+      return ('standalone' in window.navigator) && window.navigator.standalone;
+    }
+
+    window.installPWA = async function () {
+      if (isInstalled || isInStandaloneMode()) {
+        alert("O app já está instalado 👍");
+        return;
       }
 
-      deferredPrompt = null;
-      return;
-    }
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        return;
+      }
 
-    // iOS
-    if (isIos()) {
-      alert(
-        "Para instalar:\n\n" +
-        "1. Toque em compartilhar (📤)\n" +
-        "2. 'Adicionar à Tela de Início'"
-      );
-      return;
-    }
+      if (isIos()) {
+        alert(
+          "Para instalar:\n\n" +
+          "1. Toque em compartilhar (📤)\n" +
+          "2. 'Adicionar à Tela de Início'"
+        );
+        return;
+      }
 
-    alert("Instalação não disponível.");
-  };
+      alert("Instalação não disponível.");
+    };
 
-  // 🔥 Flutter consulta isso
-  window.canInstallPWA = function () {
-    return !!deferredPrompt;
-  };
-</script> 
-
-
+    window.canInstallPWA = function () {
+      return !!deferredPrompt;
+    };
+  </script>
 
 </body>
 </html>
